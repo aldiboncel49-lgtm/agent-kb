@@ -1,10 +1,10 @@
-# agent-kb — AI-Powerable Knowledge Base
+# agent-kb — Knowledge Base with Semantic Search
 
-> Multi-source ingest, semantic search, AI-queryable. Built entirely with AI agents.
+> Multi-source ingest, semantic search, natural language queries. Built with Hermes.
 
 ## What it does
 
-agent-kb is a personal knowledge base that ingests content from multiple sources — RSS feeds, GitHub repos, web pages, PDFs — and makes them searchable with natural language. Instead of keyword matching, it uses semantic search to understand what you're actually looking for. Ask a question in plain English, get back relevant passages with sources.
+agent-kb is a personal knowledge base that ingests content from multiple sources — RSS feeds, GitHub repos, web pages — and makes them searchable with natural language. Instead of keyword matching, it uses TF-IDF + cosine similarity to understand what you're actually looking for. Ask a question in plain English, get back relevant passages with sources.
 
 ## How it works
 
@@ -12,59 +12,44 @@ agent-kb is a personal knowledge base that ingests content from multiple sources
 - RSS/Atom feeds → parsed, chunked, embedded
 - GitHub repos → README + markdown crawled, indexed
 - Web pages (URLs) → content extracted, cleaned, embedded
-- PDFs → text extracted, chunked, embedded
 
 **Search:**
-- Vector embeddings stored in SQLite (no external DB needed)
-- Cosine similarity matching
-- Ranked results with source attribution
+- Client-side TF-IDF + cosine similarity (zero external dependencies)
+- Ranked results with relevance scores
+- Works entirely in the browser — no backend needed
 
-**AI Query:**
-- Natural language questions routed through an LLM
-- Relevant passages retrieved first, then synthesized into an answer
-- Always cites sources — no hallucination without backup
+**Queries:**
+- Natural language questions matched against indexed content
+- Results ranked by semantic relevance, not exact keyword match
 
-## Agent-Driven Development
+## Building process
 
-This entire project was built by an AI agent (Hermes Agent) in a single session:
-- Scaffolded project structure
-- Wrote ingest module for RSS + GitHub + web
-- Implemented TF-IDF + cosine similarity semantic search (zero external dependencies)
-- Built responsive web frontend with search, browse, tag views
-- Deployed to Vercel via agent-executed git push
+This project was built using Hermes as a coding assistant in a single session:
+
+1. Scaffolded the project structure (Python libraries + web frontend)
+2. Wrote the ingest pipeline for RSS, GitHub, and web sources
+3. Implemented TF-IDF embedding and cosine similarity search
+4. Built the responsive web frontend (dark theme, mobile-friendly)
+5. Encountered Vercel Python runtime deployment issues — restructured to client-side-only
+6. Debugged JavaScript compatibility issues
+7. Pushed to GitHub and deployed to Vercel
 
 ## Structure
 
 ```
 agent-kb/
-├── api/            # Vercel serverless functions
-│   ├── ingest.py   # Add new content
-│   ├── search.py   # Semantic search
-│   └── query.py    # AI-powered Q&A
-├── lib/
-│   ├── ingest.py   # Ingest pipeline
-│   ├── embed.py    # Embedding + similarity
-│   └── db.py       # SQLite storage
 ├── frontend/
 │   ├── index.html  # Search UI
 │   ├── style.css   # Styling
-│   └── app.js      # Frontend logic
+│   └── app.js      # Frontend logic + embedded search engine
 ├── vercel.json
-├── requirements.txt
 └── README.md
-```
-
-## Running locally
-
-```bash
-pip install -r requirements.txt
-python -m api.ingest   # Feed it some URLs
-python -m api.search   # Search
-python -m api.query    # Ask questions
 ```
 
 ## Demo
 
-Live at: [will be deployed]
+Live at: https://agent-ips9ikve2-braddo-s-projects.vercel.app
 
-Built by an AI agent. Because the best way to prove agents work is to build something useful with one.
+## Local development
+
+Since the search runs client-side, just open `frontend/index.html` in a browser. No server needed.
