@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>agent-kb — AI Knowledge Base</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="logo">
+      <span class="logo-icon">🧠</span>
+      <span class="logo-text">agent-kb</span>
+    </div>
+    <nav class="nav">
+      <a href="#" class="nav-item active" data-view="search">Search</a>
+      <a href="#" class="nav-item" data-view="browse">Browse</a>
+      <a href="#" class="nav-item" data-view="add">Add Source</a>
+      <a href="#" class="nav-item" data-view="stats">Stats</a>
+    </nav>
+    <div class="sidebar-footer">
+      <p>Built by an AI agent</p>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- Search View -->
+    <div class="view active" id="view-search">
+      <h1>Knowledge Base</h1>
+      <p class="subtitle">Ask anything. Get sourced answers.</p>
+      <form class="search-form" id="search-form">
+        <input type="text" id="search-input" placeholder="Ask a question or search keywords..." autocomplete="off">
+        <button type="submit">Search</button>
+      </form>
+      <div class="results" id="results"></div>
+    </div>
+
+    <!-- Browse View -->
+    <div class="view" id="view-browse">
+      <h1>Browse Documents</h1>
+      <div class="doc-list" id="doc-list"></div>
+    </div>
+
+    <!-- Add Source View -->
+    <div class="view" id="view-add">
+      <h1>Add Source</h1>
+      <p class="subtitle">Ingest a URL, RSS feed, or paste text.</p>
+      <form class="ingest-form" id="ingest-form">
+        <div class="form-group">
+          <label>URL</label>
+          <input type="url" id="ingest-url" placeholder="https://..." autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label>Title (optional)</label>
+          <input type="text" id="ingest-title" placeholder="Auto-detected if empty">
+        </div>
+        <div class="form-group">
+          <label>Tags (comma-separated)</label>
+          <input type="text" id="ingest-tags" placeholder="tech, tutorial, python">
+        </div>
+        <button type="submit">Ingest</button>
+      </form>
+      <div id="ingest-result"></div>
+    </div>
+
+    <!-- Stats View -->
+    <div class="view" id="view-stats">
+      <h1>Statistics</h1>
+      <div class="stats" id="stats-grid"></div>
+    </div>
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
